@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/cantieri", "destination": "https://borgo-santo-cantieri.vercel.app/", "permanent": false },
+    { "source": "/cantieri/:path*", "destination": "https://borgo-santo-cantieri.vercel.app/", "permanent": false }
+  ]
+}
