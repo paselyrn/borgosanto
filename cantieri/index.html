@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Borgo Santo Cantieri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>:root{color-scheme:light dark;--land:light-dark(#ffffff,#141416);--ink:light-dark(#1d1d1f,#f5f5f7);--ink2:light-dark(#6e6e73,#a1a1a6);--ink3:light-dark(#aeaeb2,#636366);--line:light-dark(#e8e8ed,#323235);--fill:light-dark(#f5f5f7,#232325);--road:light-dark(#ececf0,#29292c);--bld:light-dark(#ebebef,#222225);--bldedge:light-dark(#dcdce1,#2e2e32);--own:light-dark(#d1d1d6,#45454a);--tree:light-dark(#e1eedb,#1c2a1b);--pool:light-dark(#d6ebf7,#163445);--glass:light-dark(rgba(242,242,247,.86),rgba(22,22,24,.86));--group:light-dark(#ffffff,#2c2c2e);--solid:light-dark(#ffffff,#1c1c1e);--seg:light-dark(#ffffff,#636366);--red:light-dark(#ff3b30,#ff453a);--orange:light-dark(#ff9500,#ff9f0a);--green:light-dark(#34c759,#30d158);--blue:light-dark(#0071e3,#0a84ff);--grey:light-dark(#aeaeb2,#8e8e93);--shadow:0 0 0 .5px rgba(0,0,0,.05),0 12px 40px rgba(0,0,0,.08)}:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}*{box-sizing:border-box;min-width:0}html,body{height:100%}body{margin:0;background:var(--land);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text",Inter,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.006em;display:flex;flex-direction:column;overflow:hidden}button{font:inherit;color:inherit;letter-spacing:inherit}.num{font-variant-numeric:tabular-nums}.bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;height:52px;padding:0 20px;border-bottom:.5px solid var(--line);background:var(--solid);position:relative;z-index:5}.brand{font-size:15px;font-weight:600;white-space:nowrap}.brand span{color:var(--ink3);font-weight:400;margin-left:6px}.today{justify-self:end;color:var(--ink3);font-size:13px;white-space:nowrap}.seg{display:inline-flex;background:var(--fill);border-radius:9px;padding:2px;gap:2px}.seg button{border:0;background:none;border-radius:7px;padding:5px 14px;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:5px;color:var(--ink2)}.seg button[aria-pressed=true]{background:var(--seg);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.1),0 0 0 .5px rgba(0,0,0,.04)}.seg button[aria-disabled=true]{color:var(--ink3);cursor:not-allowed}.seg svg{width:9px;height:9px}button:focus-visible,.row:focus-visible{outline:2px solid var(--blue);outline-offset:2px}.app{position:relative;flex:1;min-height:0}.map{position:absolute;inset:0;overflow:hidden;background:var(--land);touch-action:none;cursor:grab}.map.drag{cursor:grabbing}.map>svg{position:absolute;inset:0;width:100%;height:100%;display:block}.road{fill:var(--road);fill-rule:evenodd}.pool{fill:var(--pool)}.tree{fill:var(--tree)}.vb{fill:var(--bld);stroke:var(--bldedge);stroke-width:.6;vector-effect:non-scaling-stroke}.ob{fill:var(--own)}.sb{fill:color-mix(in srgb,var(--c) 20%,var(--land));stroke:var(--c);stroke-width:1.25;vector-effect:non-scaling-stroke;cursor:pointer;transition:fill .2s}.sb.hot{fill:color-mix(in srgb,var(--c) 50%,var(--land))}.buf{fill:color-mix(in srgb,var(--c) 6%,transparent);stroke:var(--c);stroke-opacity:.6;stroke-width:1;stroke-dasharray:4 5;vector-effect:non-scaling-stroke;opacity:0;transition:opacity .25s;pointer-events:none}.buf.on{opacity:1}.s-red{--c:var(--red)}.s-orange{--c:var(--orange)}.s-green{--c:var(--green)}.ov{position:absolute;inset:0;pointer-events:none}.ov svg{position:absolute;inset:0;width:100%;height:100%}.lead{stroke:var(--ink3);stroke-width:.75}.anchor{fill:var(--c);stroke:var(--solid);stroke-width:2}.pin{position:absolute;z-index:2;transform:translate(-50%,-50%);pointer-events:auto;display:flex;align-items:center;gap:7px;border:0;background:var(--solid);border-radius:20px;padding:6px 12px 6px 9px;box-shadow:var(--shadow);cursor:pointer;white-space:nowrap;font-size:13px;line-height:1.2}.pin .dot{width:8px;height:8px;border-radius:50%;background:var(--c);flex:none}.pin b{font-weight:600}.pin em{font-style:normal;color:var(--ink2)}.pin.sel{box-shadow:0 0 0 2px var(--c),var(--shadow)}.warn{position:absolute;width:16px;height:14px;transform:translate(-50%,-50%);pointer-events:auto}.warn svg{width:100%;height:100%;display:block}.w-occ{--w:var(--red)}.w-arr{--w:var(--orange)}.w-free{--w:var(--grey)}.hide-warn .warn{display:none}.panel{position:absolute;top:20px;left:20px;max-height:calc(100% - 40px);width:340px;overflow:auto;background:var(--glass);-webkit-backdrop-filter:blur(30px) saturate(1.8);backdrop-filter:blur(30px) saturate(1.8);border-radius:22px;box-shadow:var(--shadow);padding:26px 16px 16px;z-index:3}h1{font-size:30px;line-height:1.05;letter-spacing:-.025em;margin:0 6px 8px;font-weight:700}.finding{margin:0 6px 20px;color:var(--ink2);font-size:15px;line-height:1.4;text-wrap:pretty}.finding b{color:var(--ink);font-weight:600}.panel .seg{display:flex;margin:0 0 14px}.panel .seg button{flex:1;padding:5px 2px;font-size:12px}.group{background:var(--group);border-radius:14px;overflow:hidden;margin:0 0 14px}.row{display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;text-align:left;padding:12px 14px;cursor:pointer;position:relative}.row+.row::before{content:"";position:absolute;top:0;left:34px;right:0;border-top:.5px solid var(--line)}.row:hover,.row.hot,.row.sel{background:var(--fill)}.row .dot{width:8px;height:8px;border-radius:50%;background:var(--c);flex:none}.row .tx{flex:1}.row .tx b{display:block;font-weight:500;font-size:15px;line-height:1.25}.row .tx small{display:block;color:var(--ink2);font-size:13px}.row .val{font-size:15px;font-weight:600;white-space:nowrap;text-align:right}.row .chev{color:var(--ink3);font-size:18px;line-height:1;margin-left:-4px}.bad{color:var(--red)}.good{color:var(--green)}.switch{display:flex;align-items:center;gap:12px;padding:11px 14px;cursor:pointer;user-select:none}.switch .tx{flex:1;font-size:15px}.switch .tx small{display:block;color:var(--ink2);font-size:13px}.switch input{appearance:none;width:44px;height:26px;border-radius:13px;background:var(--line);position:relative;margin:0;cursor:pointer;transition:background .2s;flex:none}.switch input::after{content:"";position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .2s}.switch input:checked{background:var(--green)}.switch input:checked::after{transform:translateX(18px)}.switch input:focus-visible{outline:2px solid var(--blue);outline-offset:2px}.tri{width:15px;height:13px;flex:none;display:block}.fine{font-size:12px;color:var(--ink3);margin:4px 6px 0}.zoom{position:absolute;right:20px;bottom:20px;display:flex;align-items:flex-end;gap:12px;z-index:2}.scale{font-size:11px;color:var(--ink3);text-align:center;padding-bottom:4px}.scale i{display:block;height:4px;border:1px solid var(--ink3);border-top:0;margin-top:2px}.zb{display:flex;flex-direction:column;background:var(--glass);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}.ic{border:0;background:none;width:38px;height:38px;font-size:19px;line-height:1;cursor:pointer;color:var(--ink2)}.zb .ic+.ic{border-top:.5px solid var(--line)}.tip{position:fixed;z-index:20;pointer-events:none;background:var(--solid);color:var(--ink);box-shadow:var(--shadow);border-radius:12px;padding:8px 12px;font-size:13px;line-height:1.4;max-width:260px;opacity:0;transition:opacity .12s}.tip.on{opacity:1}.tip small{display:block;color:var(--ink2);font-size:12px}.sheet{position:absolute;top:20px;right:20px;bottom:20px;width:min(440px,calc(100% - 40px));background:var(--solid);border-radius:22px;box-shadow:var(--shadow);overflow:auto;z-index:4;transform:translateX(calc(100% + 40px));transition:transform .4s cubic-bezier(.2,.8,.2,1);visibility:hidden}.sheet.open{transform:none;visibility:visible}.sh{padding:26px 28px 32px}.x{float:right;margin:-6px -10px 0 0;width:30px;height:30px;border-radius:50%;border:0;background:var(--fill);cursor:pointer;font-size:13px;color:var(--ink2)}.st{font-size:13px;font-weight:600;color:var(--c);display:flex;align-items:center;gap:6px}.st i{width:8px;height:8px;border-radius:50%;background:var(--c)}.sh h2{font-size:34px;line-height:1.05;letter-spacing:-.03em;margin:6px 0 6px;font-weight:700}.sh .sub{color:var(--ink2);margin:0;font-size:15px}.hero{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 20px;margin:28px 0 26px}.hero b{display:block;font-size:28px;font-weight:600;letter-spacing:-.025em;line-height:1.1;white-space:nowrap}.hero span{display:block;font-size:13px;color:var(--ink2);margin-top:4px;line-height:1.35}.mini{position:relative;height:4px;border-radius:2px;background:var(--fill);margin:10px 0 0}.mini span{position:absolute;inset:0 auto 0 0;border-radius:2px;background:var(--c);margin:0}.mini i{position:absolute;top:-3px;bottom:-3px;width:1.5px;background:var(--ink)}.hair{border:0;border-top:.5px solid var(--line);margin:0}details.near{border-bottom:.5px solid var(--line)}details.near summary{list-style:none;display:flex;align-items:center;gap:10px;padding:14px 0;cursor:pointer;font-size:15px}details.near summary::-webkit-details-marker{display:none}details.near summary em{margin-left:auto;font-style:normal;color:var(--ink2);display:flex;align-items:center;gap:8px}details.near summary em::after{content:"\203A";font-size:18px;color:var(--ink3);transition:transform .2s}details.near[open] summary em::after{transform:rotate(90deg)}details.near ul{list-style:none;margin:0 0 12px;padding:0}details.near li{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:14px}details.near li small{color:var(--ink2)}details.near li em{margin-left:auto;font-style:normal;color:var(--ink3);font-size:13px;white-space:nowrap}.why{font-size:13px;color:var(--ink2);margin:10px 0 0}.sh .seg{display:flex;margin:24px 0 22px}.sh .seg button{flex:1}.tl-row{padding:0 0 16px}.tl-h{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;margin-bottom:6px}.tl-h b{font-weight:500}.tl-h small{font-size:13px;color:var(--ink2);white-space:nowrap}.tl-tr{position:relative;height:10px}.tl-tr span{position:absolute;height:4px;border-radius:2px}.tl-p{top:0;background:var(--line)}.tl-a{top:6px}.a-done{background:var(--ink2)}.a-now{background:var(--blue)}.a-fut{background:color-mix(in srgb,var(--blue) 28%,transparent)}.tl{position:relative}.tday{position:absolute;top:-3px;bottom:-3px;width:1.5px;background:var(--red);border-radius:1px}.axis .oggi{position:absolute;transform:translateX(-50%);color:var(--red);font-weight:600}.axis{position:relative;display:flex;justify-content:space-between;font-size:11px;color:var(--ink3);margin:2px 0 0}.key{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink2);margin-top:14px}.key span{display:inline-flex;align-items:center;gap:6px}.key i{width:14px;height:4px;border-radius:2px;display:inline-block}.btop{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}.btop b{font-size:28px;font-weight:600;letter-spacing:-.025em}.btop span{color:var(--ink2);font-size:13px}.brow{padding:0 0 16px}.brow .tl-h small.bad{color:var(--red)}.bt{position:relative;height:6px;border-radius:3px;background:var(--fill);overflow:visible}.bt span{position:absolute;top:0;bottom:0}.b-sp{background:var(--ink)}.b-im{background:color-mix(in srgb,var(--ink) 35%,var(--land))}.b-ex{background:var(--red)}.bt span:first-child{border-radius:3px 0 0 3px}.bt i{position:absolute;top:-3px;bottom:-3px;width:1.5px;background:var(--ink2)}.lst{list-style:none;margin:0;padding:0}.lst li{padding:13px 0;border-bottom:.5px solid var(--line);display:flex;gap:12px;align-items:baseline}.lst li:last-child{border-bottom:0}.lst .tx{flex:1;font-size:15px;line-height:1.3}.lst .tx small{display:block;color:var(--ink2);font-size:13px;margin-top:2px}.lst .tg{font-size:13px;font-weight:500;color:var(--c);white-space:nowrap}.k-ok{--c:var(--green)}.k-wait{--c:var(--orange)}.k-block{--c:var(--red)}.k-todo{--c:var(--ink3)}.pA{--c:var(--red)}.pM{--c:var(--orange)}.pB{--c:var(--ink2)}@media (max-width:899px){html,body{height:auto;overflow:auto}body{display:block}.bar{grid-template-columns:1fr;height:auto;padding:12px 16px;row-gap:10px}.today{display:none}.bar .seg{justify-self:start;max-width:100%;overflow-x:auto}.app{display:flex;flex-direction:column}.map{position:relative;height:min(56vh,500px);min-height:300px;border-bottom:.5px solid var(--line)}.panel{position:static;width:auto;max-height:none;background:var(--fill);box-shadow:none;border-radius:0;padding:26px 16px 30px;-webkit-backdrop-filter:none;backdrop-filter:none;overflow:visible}.zoom{right:12px;bottom:12px}.sheet{position:fixed;inset:0;width:auto;border-radius:0;z-index:30;overscroll-behavior:contain}.sh{padding-top:14px}.x{position:sticky;top:10px;z-index:2;float:none;display:block;margin:0 -8px 8px auto;width:36px;height:36px;font-size:15px;box-shadow:0 1px 6px rgba(0,0,0,.12)}.pin{padding:5px 10px 5px 8px;font-size:12px}.zoom .ic{width:42px;height:42px}}@media (max-width:420px){.hero b{font-size:24px}.sh{padding:22px 20px 28px}}@media (prefers-reduced-motion:reduce){.sheet,.buf,.sb{transition:none}}</style>
+</head>
+<body>
+<header class="bar">
+ <div class="brand">Borgo Santo<span>Immobili</span></div>
+ <div class="seg" role="group" aria-label="Stato degli immobili">
+  <button type="button" aria-disabled="true" title="Non incluso in questa demo"><svg viewBox="0 0 10 10" aria-hidden="true"><rect x="1.5" y="4.5" width="7" height="5" rx="1" fill="currentColor"/><path d="M3 4.5V3a2 2 0 0 1 4 0v1.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>In acquisizione</button>
+  <button type="button" aria-pressed="true">In cantiere</button>
+  <button type="button" aria-disabled="true" title="Non incluso in questa demo"><svg viewBox="0 0 10 10" aria-hidden="true"><rect x="1.5" y="4.5" width="7" height="5" rx="1" fill="currentColor"/><path d="M3 4.5V3a2 2 0 0 1 4 0v1.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>Operativi</button>
+ </div>
+ <div class="today">Luned&#xec; 23 novembre 2026</div>
+</header>
+<main class="app">
+ <div class="map" id="map" aria-label="Mappa di Chiusure">
+  <svg id="svg" aria-hidden="true"><g id="world"></g></svg>
+  <div class="ov" id="ov"><svg id="leads"></svg></div>
+  <div class="zoom">
+   <div class="scale" id="scale"><span></span><i></i></div>
+   <div class="zb"><button class="ic" id="zin" type="button" aria-label="Ingrandisci">+</button><button class="ic" id="zout" type="button" aria-label="Riduci">&minus;</button><button class="ic" id="zfit" type="button" aria-label="Centra il borgo" style="font-size:14px">&#9678;</button></div>
+  </div>
+ </div>
+ <aside class="panel" id="panel"></aside>
+ <section class="sheet" id="sheet" aria-label="Scheda del cantiere"></section>
+</main>
+<div class="tip" id="tip"></div>
+<script>
+{
+const TODAY='2026-11-23';
+const OCC=[.30,.35,.45,.62,.75,.85,.88,.90,.85,.72,.40,.38];
+const OPS={
+ studio_jenner:{n:'Studio Jenner',st:'occ',note:'check-out 26 nov'},
+ gina:{n:'Casa Gina',st:'arr',note:'24 nov'},
+ luna:{n:'Casa Luna',st:'free',note:'libera fino al 12 dic'},
+ maria:{n:'Studio Maria',st:'occ',note:'check-out 25 nov'},
+ patrizia:{n:'Casa Patrizia',st:'arr',note:'25 nov'},
+ rosa:{n:'Casa Rosa',st:'occ',note:'check-out 28 nov'},
+ isabella:{n:'Studio Isabella',st:'free',note:'libera fino al 4 dic'},
+ ortensia:{n:'Studio Ortensia',st:'occ',note:'check-out 24 nov'},
+ beatrice:{n:'Casa Beatrice',st:'occ',note:'check-out 27 nov'},
+ franca:{n:'Studio Franca',st:'free',note:'libera'},
+ caterina:{n:'Casa Caterina',st:'occ',note:'check-out 29 nov'},
+ eleonora:{n:'Casa Eleonora',st:'arr',note:'26 nov'},
+ diana:{n:'Casa Diana',st:'free',note:'libera'}
+};
+const SITES=[
+{id:'jenner',name:'Casa Jenner',start:'2025-11-03',done:78,plan:92,
+ units:[{n:'Casa Jenner #2',m2:40,cat:'camera standard',adr:480},{n:'Casa Jenner #3',m2:63,cat:'suite',adr:620}],
+ note:'Nello stesso edificio lo Studio Jenner resta aperto agli ospiti.',
+ phases:[['Progetto e permessi','2026-02-27','2026-02-20','done'],['Strutture','2026-05-29','2026-06-19','done'],['Impianti','2026-09-25','2026-11-06','done'],['Arredo','2026-11-27','2027-01-15','doing'],['Collaudo','2026-12-11','2027-01-22','todo'],['Consegna','2026-12-18','2027-01-29','todo']],
+ budget:[['Opere',210e3,205e3,15e3,228e3],['Impianti',150e3,148e3,12e3,166e3],['Finiture',95e3,40e3,52e3,104e3],['Arredo',85e3,10e3,60e3,86e3],['Dotazioni',30e3,0,18e3,30e3],['Professionisti',50e3,41e3,9e3,54e3]],
+ permits:[{n:'Autorizzazione paesaggistica',e:'Comune di Asciano',st:'ok',d:'Rilasciata il 12 feb 2026'},{n:'SCIA edilizia',e:'Comune di Asciano',st:'ok',d:'Efficace dal 20 feb 2026'},{n:'Notifica preliminare di cantiere',e:'ASL Toscana Sud Est',st:'ok',d:'Inviata il 25 feb 2026'},{n:'Segnalazione di agibilità',e:'Comune di Asciano',st:'todo',d:'Da presentare a fine lavori'}],
+ risks:[{r:'Serramenti su misura: la consegna è slittata a metà dicembre',p:'Alta',i:'2 settimane, circa 4.600 € di ricavi',o:'Direzione lavori'},{r:'Rumore nello Studio Jenner, occupato fino al 26 novembre',p:'Alta',i:'Recensioni, possibile rimborso',o:'Front office'},{r:'Umidità di risalita al piano terra',p:'Bassa',i:'circa 8.000 €',o:'Impresa edile'}]},
+{id:'romana',name:'Porta Romana',start:'2025-09-01',done:55,plan:61,
+ units:[{n:'Porta Romana #1',m2:150,cat:'appartamento, 6 ospiti',adr:1100},{n:'Porta Romana #2',m2:150,cat:'appartamento, 6 ospiti',adr:1100}],
+ phases:[['Progetto e permessi','2025-12-19','2026-01-09','done'],['Strutture','2026-06-26','2026-07-24','done'],['Impianti','2026-11-27','2026-12-23','doing'],['Arredo','2027-02-26','2027-03-26','todo'],['Collaudo','2027-03-19','2027-04-16','todo'],['Consegna','2027-03-26','2027-04-23','todo']],
+ budget:[['Opere',520e3,470e3,70e3,545e3],['Impianti',330e3,160e3,150e3,340e3],['Finiture',240e3,20e3,140e3,245e3],['Arredo',220e3,0,80e3,220e3],['Dotazioni',70e3,0,10e3,70e3],['Professionisti',100e3,72e3,25e3,100e3]],
+ permits:[{n:'Autorizzazione paesaggistica',e:'Comune di Asciano',st:'ok',d:'Rilasciata il 18 dic 2025'},{n:'Parere sulle coperture',e:'Soprintendenza ABAP Siena',st:'ok',d:'Favorevole, con coppi di recupero'},{n:'Permesso di costruire',e:'Comune di Asciano',st:'ok',d:'Rilasciato il 9 gen 2026'},{n:'Variante in corso d\'opera, impianti',e:'Comune di Asciano',st:'wait',sent:'2026-11-05'},{n:'Segnalazione di agibilità',e:'Comune di Asciano',st:'todo',d:'Da presentare a fine lavori'}],
+ risks:[{r:'Variante impianti approvata in ritardo',p:'Media',i:'2 settimane, circa 19.000 € di ricavi',o:'Progettista'},{r:'Ponteggio sulla strada di accesso a Casa Rosa',p:'Alta',i:'Disagio per gli ospiti',o:'Front office'},{r:'Reperimento dei coppi di recupero',p:'Media',i:'circa 6.000 €',o:'Direzione lavori'}]},
+{id:'hill',name:'Hill Studio',start:'2026-02-02',done:71,plan:68,
+ units:[{n:'Hill Studio',m2:53,cat:'suite',adr:650}],
+ phases:[['Progetto e permessi','2026-04-24','2026-04-30','done'],['Strutture','2026-07-31','2026-07-24','done'],['Impianti','2026-10-30','2026-10-23','done'],['Arredo','2027-01-29','2027-01-22','doing'],['Collaudo','2027-02-19','2027-02-12','todo'],['Consegna','2027-02-26','2027-02-19','todo']],
+ budget:[['Opere',95e3,92e3,0,92e3],['Impianti',70e3,68e3,0,68e3],['Finiture',45e3,20e3,22e3,44e3],['Arredo',45e3,5e3,35e3,45e3],['Dotazioni',12e3,0,6e3,12e3],['Professionisti',23e3,18e3,4e3,23e3]],
+ permits:[{n:'Autorizzazione paesaggistica semplificata',e:'Comune di Asciano',st:'ok',d:'Rilasciata il 21 apr 2026'},{n:'SCIA edilizia',e:'Comune di Asciano',st:'ok',d:'Efficace dal 30 apr 2026'},{n:'Segnalazione di agibilità',e:'Comune di Asciano',st:'todo',d:'Da presentare a fine lavori'}],
+ risks:[{r:'Cucina su misura da un solo fornitore',p:'Bassa',i:'1 settimana',o:'Direzione lavori'},{r:'Finestra a tetto da approvare in variante',p:'Bassa',i:'circa 3.000 €',o:'Progettista'}]},
+{id:'museo',name:'Museo privato',start:'2026-03-02',done:12,plan:18,
+ units:[],note:'Spazio comune: non ha chiavi da vendere, quindi nessun ricavo diretto a rischio.',
+ phases:[['Progetto e permessi','2026-07-31','2026-08-28','done'],['Strutture','2027-02-26','2027-03-26','doing'],['Impianti','2027-06-25','2027-07-23','todo'],['Arredo','2027-09-03','2027-10-01','todo'],['Collaudo','2027-09-24','2027-10-22','todo'],['Consegna','2027-09-30','2027-10-29','todo']],
+ budget:[['Opere',900e3,150e3,620e3,1020e3],['Impianti',480e3,0,120e3,520e3],['Finiture',300e3,0,0,320e3],['Arredo',220e3,0,0,240e3],['Dotazioni',50e3,0,0,50e3],['Professionisti',150e3,95e3,55e3,160e3]],
+ permits:[{n:'Permesso di costruire',e:'Comune di Asciano',st:'ok',d:'Rilasciato il 28 ago 2026'},{n:'Deposito sismico',e:'Genio Civile Toscana Sud',st:'ok',d:'Depositato il 3 set 2026'},{n:'Parere sulla variante di facciata',e:'Soprintendenza ABAP Siena',st:'wait',sent:'2026-10-08',block:true},{n:'Segnalazione di agibilità',e:'Comune di Asciano',st:'todo',d:'Da presentare a fine lavori'}],
+ risks:[{r:'Parere negativo sulla facciata: riprogettazione',p:'Media',i:'6 settimane, circa 60.000 €',o:'Progettista'},{r:'Aumento del prezzo dell\'acciaio',p:'Media',i:'circa 25.000 €',o:'Acquisti'},{r:'Ritrovamenti archeologici negli scavi',p:'Bassa',i:'Fermo lavori',o:'Direzione lavori'}]}
+];
+
+const GEO={"mpx":0.25,"r":25,"village":[[[861,1026],[849,1069],[870,1075],[873,1066],[882,1068],[886,1050],[876,1047],[880,1031]],[[1381,1020],[1361,1024],[1368,1061],[1388,1058]],[[832,1010],[810,1047],[823,1055],[845,1018]],[[1132,988],[1076,1026],[1096,1055],[1152,1016]],[[727,980],[716,996],[754,1021],[765,1004]],[[1190,947],[1135,986],[1154,1014],[1210,976]],[[1241,916],[1201,942],[1215,963],[1255,936]],[[606,896],[588,932],[630,953],[648,918]],[[1335,858],[1320,869],[1337,892],[1351,882]],[[1370,836],[1352,847],[1372,878],[1390,867]],[[806,830],[785,860],[805,874],[828,841],[822,841]],[[649,824],[635,842],[651,852],[644,863],[667,876],[674,865],[678,867],[688,850]],[[1392,822],[1372,835],[1391,866],[1412,854]],[[882,817],[872,832],[896,848],[906,832]],[[785,816],[764,845],[782,858],[802,828]],[[771,784],[740,828],[763,844],[784,815],[777,810],[786,795]],[[1291,775],[1270,788],[1293,824],[1314,811]],[[1318,758],[1296,772],[1318,808],[1340,794]],[[827,754],[801,788],[846,820],[872,782],[854,766],[847,772]],[[646,745],[639,756],[671,781],[680,766]],[[446,744],[442,754],[464,768],[472,758],[473,758],[486,768],[479,776],[488,781],[501,767],[476,744],[464,758]],[[398,739],[379,759],[404,784],[424,764]],[[493,717],[492,724],[476,743],[502,766],[522,743]],[[781,709],[758,706],[754,714],[752,714],[739,706],[732,718],[715,712],[696,743],[741,771]],[[545,684],[530,709],[564,729],[565,732],[562,736],[595,755],[588,770],[584,768],[560,806],[563,808],[617,740],[637,754],[644,744]],[[460,681],[430,722],[444,734],[470,704],[482,714],[489,704]],[[543,682],[531,675],[528,674],[518,687],[516,688],[500,678],[492,693],[503,698],[508,692],[519,694],[520,695],[519,702],[528,708]],[[707,671],[701,694],[710,695],[736,692],[737,681]],[[317,664],[301,677],[320,701],[336,688]],[[634,658],[628,684],[646,691],[647,684],[649,684],[697,693],[702,670],[674,661],[674,657],[664,654],[661,667]],[[759,702],[784,706],[796,687],[810,686],[813,680],[815,679],[842,692],[832,712],[882,755],[891,747],[893,749],[915,732],[902,715],[863,694],[844,676],[848,671],[827,652],[808,674],[808,675],[774,672],[774,674]],[[321,637],[323,644],[340,666],[356,652],[353,641]],[[572,632],[561,665],[582,672],[585,665],[586,664],[598,669],[600,672],[626,682],[632,658],[587,642],[588,639]],[[391,631],[386,636],[388,644],[396,658],[405,652],[417,669],[399,681],[386,667],[374,676],[382,686],[372,694],[388,714],[403,714],[410,707],[428,722],[458,680],[448,671],[422,700],[421,700],[410,689],[430,670],[407,650]],[[713,630],[738,645],[770,640],[774,667],[806,671],[801,640]],[[420,569],[391,582],[411,633],[436,613],[433,609],[434,604]],[[790,572],[773,566],[774,576],[733,581],[706,583],[710,628],[720,628],[801,637]],[[430,572],[457,619],[465,626],[466,625],[477,609],[479,608],[508,627],[508,630],[494,652],[504,656],[516,642],[538,658],[537,663],[550,670],[556,656],[550,652],[558,635],[542,626],[536,634],[519,619],[524,610],[506,599],[501,607],[499,606],[482,592],[462,558],[444,563]],[[418,537],[384,545],[389,569],[423,561]],[[358,534],[345,538],[348,556],[310,564],[313,582],[292,586],[295,612],[308,611],[310,607],[337,604],[338,613],[340,613],[339,618],[341,630],[320,634],[352,638],[342,588],[363,581],[361,564],[367,562]],[[745,528],[712,554],[720,565],[760,552],[750,538]],[[457,528],[422,536],[427,560],[462,552]],[[730,502],[695,530],[710,551],[742,525]],[[706,482],[675,506],[688,519],[693,527],[728,500]],[[679,462],[660,490],[674,504],[704,481]],[[464,429],[451,446],[473,463],[486,446]],[[482,406],[466,427],[488,444],[504,424]],[[453,341],[440,377],[465,386],[478,350]],[[381,315],[373,350],[398,356],[406,321]],[[464,309],[454,340],[492,354],[504,323]],[[543,251],[520,279],[550,299],[570,276]],[[1092,248],[1054,271],[1074,304],[1115,283]],[[516,230],[534,244],[517,229]],[[918,222],[899,232],[914,259],[933,248]],[[1067,210],[1030,230],[1053,270],[1091,247]],[[544,202],[520,226],[573,272],[598,244]],[[802,182],[781,199],[816,245],[838,229]],[[933,179],[883,205],[898,230],[916,220],[913,212],[944,196]],[[1126,168],[1094,186],[1116,224],[1148,206]],[[850,147],[806,180],[841,226],[885,193]],[[1033,100],[1007,104],[1010,131],[1036,128]],[[648,81],[621,101],[640,126],[667,106]],[[1030,72],[1004,75],[1007,102],[1033,99]]],"bs":[{"id":"tecnico","name":"Locale tecnico","units":[],"pts":[[857,840],[846,854],[854,861],[866,847]],"c":[856,850]},{"id":"rosa","name":"Casa Rosa","units":["rosa"],"pts":[[794,787],[779,810],[822,839],[838,816]],"c":[808,813]},{"id":"museo","name":"Museo privato","units":[],"site":"museo","pts":[[618,741],[558,818],[616,864],[676,788]],"c":[617,802]},{"id":"romana2","name":"Porta Romana #2","units":[],"site":"romana","pts":[[828,729],[816,742],[848,770],[860,756]],"c":[838,749]},{"id":"patrizia","name":"Casa Patrizia","units":["patrizia"],"pts":[[538,716],[528,729],[530,730],[530,741],[547,755],[564,731]],"c":[544,735]},{"id":"senese","name":"Porta Senese #1 e #2","units":[],"acq":true,"pts":[[471,706],[443,739],[463,756],[490,723]],"c":[467,731]},{"id":"romana1","name":"Porta Romana #1","units":[],"site":"romana","pts":[[796,701],[784,714],[815,741],[827,728]],"c":[805,721]},{"id":"luna","name":"Casa Luna e Studio Maria","units":["luna","maria"],"pts":[[508,694],[497,712],[523,727],[534,713],[517,703],[518,696]],"c":[515,711]},{"id":"hill","name":"Hill Studio","units":[],"site":"hill","pts":[[814,681],[807,696],[832,708],[840,693]],"c":[824,694]},{"id":"jenner","name":"Casa Jenner","units":["studio_jenner"],"site":"jenner","pts":[[587,666],[586,667],[574,693],[586,698],[598,671]],"c":[586,682]},{"id":"diana","name":"Casa Diana","units":["diana"],"pts":[[415,668],[404,654],[396,660],[391,654],[363,665],[372,675],[387,664],[399,680]],"c":[392,666]},{"id":"gina","name":"Casa Gina","units":["gina"],"pts":[[516,644],[496,670],[517,686],[537,659]],"c":[516,665]},{"id":"eleonora","name":"Casa Eleonora","units":["eleonora"],"pts":[[438,614],[414,634],[421,653],[437,670],[444,672],[460,658],[442,635]],"c":[436,646]},{"id":"isabella","name":"Studio Isabella e Ortensia","units":["isabella","ortensia"],"pts":[[478,610],[458,642],[486,660],[507,628]],"c":[482,635]},{"id":"franca","name":"Studio Franca","units":["franca"],"pts":[[336,606],[311,609],[314,632],[339,629]],"c":[325,619]},{"id":"caterina","name":"Casa Caterina","units":["caterina"],"pts":[[382,590],[348,604],[359,660],[388,648],[386,645],[378,602],[378,600],[385,600]],"c":[368,625]},{"id":"beatrice","name":"Casa Beatrice","units":["beatrice"],"pts":[[374,562],[363,565],[366,582],[344,589],[347,602],[381,588]],"c":[365,584]},{"id":"garage","name":"Garage","units":[],"pts":[[407,370],[398,404],[421,411],[430,377]],"c":[414,390]}],"roads":[{"pts":[[0,604],[0,618],[19,602],[48,581],[85,565],[143,554],[192,538],[234,517],[248,551],[278,615],[311,658],[350,696],[352,700],[445,776],[468,788],[537,809],[555,826],[651,902],[708,936],[806,985],[900,1026],[930,1036],[966,1044],[998,1044],[1073,1070],[1113,1079],[1140,1080],[1248,1074],[1270,1075],[1286,1078],[1300,1096],[1332,1125],[1357,1125],[1314,1084],[1299,1066],[1279,960],[1277,935],[1279,894],[1289,900],[1340,906],[1396,905],[1454,899],[1460,896],[1460,892],[1459,888],[1455,887],[1395,893],[1342,894],[1292,888],[1285,884],[1282,878],[1284,866],[1305,865],[1316,860],[1363,829],[1414,792],[1456,750],[1500,694],[1500,632],[1454,623],[1426,620],[1394,632],[1332,678],[1330,682],[1332,686],[1335,688],[1340,687],[1401,643],[1427,633],[1452,635],[1500,644],[1478,683],[1459,708],[1427,746],[1410,762],[1320,828],[1298,841],[1286,842],[1282,838],[1259,800],[1234,744],[1191,640],[1111,468],[1058,362],[991,220],[958,160],[949,146],[928,123],[866,71],[832,40],[797,0],[766,0],[785,24],[811,54],[861,100],[772,174],[718,211],[669,136],[662,136],[660,140],[660,144],[708,217],[624,265],[557,307],[532,328],[494,366],[426,447],[401,487],[394,492],[376,500],[380,479],[482,171],[491,128],[494,104],[492,73],[485,40],[472,0],[452,0],[468,46],[474,72],[476,102],[474,124],[465,166],[393,387],[373,377],[352,384],[326,425],[263,477],[234,505],[189,528],[138,544],[84,554],[43,572],[13,593]],"hole":false},{"pts":[[1263,885],[1260,913],[1260,936],[1267,994],[1280,1059],[1247,1057],[1140,1062],[1117,1062],[1102,1060],[1078,1053],[1031,1037],[1072,1019]],"hole":true},{"pts":[[460,664],[465,662],[558,686],[727,784],[732,784],[735,780],[735,776],[732,772],[585,686],[666,706],[672,703],[723,706],[734,706],[742,704],[749,700],[757,686],[765,690],[786,703],[890,785],[1030,905],[1106,974],[1063,1004],[1040,1015],[998,1026],[968,1027],[952,1024],[908,1010],[813,969],[716,920],[675,897],[562,809],[549,797],[547,793],[540,748],[531,728],[497,692]],"hole":true},{"pts":[[750,684],[743,695],[734,698],[723,699],[674,696],[668,692],[590,672],[577,671],[558,672],[569,632],[551,622],[607,642],[623,644],[637,637],[641,631],[660,617],[664,634],[666,637],[709,662],[713,668]],"hole":true},{"pts":[[391,579],[418,571],[432,605],[439,610],[444,620],[444,626],[454,640],[458,650],[448,655],[423,640],[411,629],[402,613]],"hole":true},{"pts":[[432,567],[461,559],[482,590],[530,613],[528,620],[532,625],[538,624],[560,635],[550,670],[472,650],[466,633],[455,619],[450,616],[445,606],[445,600]],"hole":true},{"pts":[[436,465],[444,473],[459,552],[428,560],[422,559],[417,564],[389,572],[382,548],[377,518],[391,513],[409,504],[420,492]],"hole":true},{"pts":[[371,388],[389,398],[363,474],[340,488],[307,552],[307,557],[310,560],[315,560],[318,558],[350,495],[360,490],[358,514],[365,551],[384,616],[390,629],[406,649],[443,672],[486,706],[517,738],[524,752],[528,790],[474,774],[453,763],[362,690],[358,689],[318,650],[287,610],[257,546],[243,511],[269,486],[334,432],[358,393]],"hole":true},{"pts":[[713,234],[714,242],[712,248],[665,294],[640,325],[602,379],[598,390],[593,408],[594,433],[602,454],[647,498],[654,508],[666,534],[657,608],[636,626],[630,626],[622,630],[612,630],[542,604],[490,580],[472,551],[456,467],[444,453],[508,376],[528,356],[555,331],[608,296]],"hole":true},{"pts":[[874,111],[914,144],[929,161],[957,207],[1088,479],[1168,649],[1211,754],[1236,808],[1250,834],[1265,856],[1252,871],[1120,963],[951,814],[797,690],[771,674],[716,651],[676,626],[671,607],[682,527],[664,492],[619,448],[614,437],[610,422],[610,412],[618,386],[670,314],[687,296],[727,258],[732,241],[728,225],[782,189]],"hole":true}],"pool":[[[784,888],[766,936],[854,974],[871,925]]],"trees":[[969,4,7],[703,145,9],[968,131,9],[899,156,9],[651,193,9],[940,215,9],[605,224,9],[493,238,9],[760,239,9],[1132,245,9],[962,256,9],[591,271,9],[906,270,9],[727,304,9],[402,313,9],[954,322,9],[915,326,9],[484,366,9],[957,373,9],[998,372,9],[577,380,9],[1031,386,9],[550,402,9],[1104,431,9],[580,435,9],[1019,447,9],[712,446,9],[849,454,9],[775,476,9],[589,485,9],[1019,492,9],[488,500,9],[424,516,9],[630,527,9],[830,534,9],[1027,545,9],[242,552,9],[906,553,9],[565,569,9],[825,577,9],[951,574,9],[1091,595,9],[613,595,9],[905,599,9],[262,609,9],[862,628,9],[1073,635,9],[1118,641,9],[667,641,9],[1027,670,9],[1105,689,9],[1431,690,9],[1392,696,9],[1220,702,9],[1333,732,9],[1009,740,9],[1081,745,9],[1137,749,9],[958,752,9],[1220,786,9],[713,800,9],[963,793,9],[675,805,9],[1276,807,9],[922,816,9],[1198,846,9],[1235,867,9],[1103,853,9],[531,870,9],[842,908,9],[922,909,9],[1003,933,9],[959,938,9],[1046,946,9],[695,959,9],[1249,980,9],[963,993,9],[705,1007,9],[1163,1014,9],[1164,1045,9],[722,1048,9],[759,1086,9],[832,1121,7],[486,1122,6]],"sites":{"museo":{"buffer":[[680,663],[652,647],[626,642],[594,644],[570,654],[553,665],[540,679],[475,761],[463,784],[458,809],[458,829],[462,848],[473,872],[490,892],[554,942],[582,958],[608,964],[634,962],[653,957],[676,944],[694,926],[754,849],[770,821],[775,802],[775,776],[771,757],[764,739],[743,714]],"c":[617,802]},"romana":{"buffer":[[708,649],[694,671],[685,702],[685,728],[692,753],[701,771],[714,786],[788,850],[811,862],[830,868],[849,870],[869,867],[888,861],[905,852],[920,839],[940,816],[952,793],[959,768],[958,742],[952,717],[942,700],[930,685],[856,621],[839,611],[820,604],[801,601],[775,603],[756,609],[739,618],[724,631]],"c":[822,735]},"hill":{"buffer":[[857,590],[833,582],[807,581],[788,584],[764,595],[748,606],[731,626],[715,658],[709,677],[707,696],[709,716],[718,741],[728,757],[742,772],[758,783],[795,801],[814,806],[833,808],[859,804],[878,797],[894,787],[908,773],[920,757],[933,730],[938,711],[940,692],[938,672],[932,653],[922,636],[900,613]],"c":[824,694]},"jenner":{"buffer":[[627,574],[602,567],[577,567],[558,570],[535,580],[519,592],[503,611],[480,660],[476,679],[475,705],[480,724],[487,742],[499,758],[513,772],[530,782],[553,792],[578,798],[597,797],[622,791],[640,782],[655,770],[668,756],[692,706],[697,686],[698,667],[695,647],[688,629],[678,612],[665,597],[650,585]],"c":[586,682]}},"near":[{"building":"rosa","site":"romana","m":11},{"building":"rosa","site":"hill","m":22},{"building":"patrizia","site":"museo","m":12},{"building":"patrizia","site":"jenner","m":9},{"building":"luna","site":"museo","m":21},{"building":"luna","site":"jenner","m":11},{"building":"jenner","site":"museo","m":13},{"building":"jenner","site":"jenner","m":0},{"building":"gina","site":"jenner","m":12},{"building":"isabella","site":"jenner","m":22}]};
+const MON=['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+const MONL=['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+const T=s=>Date.parse(s);
+const days=(a,b)=>Math.round((T(b)-T(a))/864e5);
+const fd=(s,y)=>{const m=+s.slice(5,7),d=+s.slice(8);return d+' '+MON[m-1]+(y?' '+s.slice(0,4):'')};
+const fdl=s=>+s.slice(8)+' '+MONL[+s.slice(5,7)-1]+' '+s.slice(0,4);
+const grp=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+const eur=n=>grp(n)+' €';
+const eurK=n=>n>=1e6?(n/1e6).toFixed(2).replace('.',',')+' mln €':grp(n/1e3)+'k €';
+const pc=x=>(x>0?'+':x<0?'−':'')+Math.abs(x*100).toFixed(1).replace('.',',')+'%';
+const gg=n=>n>0?'+'+n+' gg':n<0?'−'+(-n)+' gg':'in orario';
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const STL={red:'Critico',orange:'Da seguire',green:'In linea'};
+const WL={occ:'occupata',arr:'ospiti in arrivo',free:'vuota'};
+const wtxt=o=>o.st==='arr'?'ospiti in arrivo il '+o.note:WL[o.st]+', '+o.note;
+const tri=()=>`<svg class="tri" viewBox="0 0 20 18" aria-hidden="true"><path d="M10 1.5 19 16.5H1z" fill="var(--w)" stroke="var(--solid)" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 6.5v5" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="10" cy="14" r="1.1" fill="#fff"/></svg>`;
+
+const bldById={};GEO.bs.forEach(b=>bldById[b.id]=b);
+for(const s of SITES){
+ s.B=s.budget.reduce((a,r)=>a+r[1],0);s.E=s.budget.reduce((a,r)=>a+r[4],0);s.dev=(s.E-s.B)/s.B;
+ const last=s.phases.at(-1);s.base=last[1];s.fc=last[2];s.delay=days(s.base,s.fc);
+ s.keys=s.units.length;s.adr=s.units.reduce((a,u)=>a+u.adr,0);
+ s.month=+s.fc.slice(5,7)-1;s.occ=OCC[s.month];
+ s.rar=s.keys?Math.round(s.adr*s.occ*7):null;
+ s.permits.forEach(p=>{if(p.st==='wait'){p.wait=days(p.sent,TODAY);p.d='in attesa da '+p.wait+' giorni'}});
+ const blk=s.permits.find(p=>p.block),why=[];
+ if(s.delay>30)why.push('il ritardo supera i 30 giorni');
+ if(s.dev>.07)why.push('il budget previsto supera il 7%');
+ if(blk)why.push('un permesso blocca i lavori da '+blk.wait+' giorni');
+ if(why.length)s.st='red';else if(s.delay>0||s.dev>0)s.st='orange';else s.st='green';
+ s.why=s.st==='red'?'Critico perché '+why.join(', ').replace(/, ([^,]*)$/,' e $1')+'.':s.st==='orange'?'Da seguire: ritardo e budget sopra il piano, ma entro le soglie.':'In linea: in anticipo sul piano e sotto budget.';
+ s.c=GEO.sites[s.id].c;
+ s.sub=s.keys>1?s.units.map(u=>u.n.replace(s.name+' ','')).join(' e ')+' · '+s.keys+' chiavi':s.keys?'Suite · 1 chiave':'Spazio comune';
+}
+const siteById={};SITES.forEach(s=>siteById[s.id]=s);
+const NEAR=[],nb={};
+GEO.near.forEach(n=>{(nb[n.building]=nb[n.building]||[]).push(n)});
+for(const [bid,list] of Object.entries(nb)){const b=bldById[bid];list.sort((x,y)=>x.m-y.m);b.units.forEach(u=>{if(OPS[u])NEAR.push({u,b,o:OPS[u],near:list})})}
+
+const world=document.getElementById('world');
+const pth=pts=>'M'+pts.map(p=>p[0]+' '+p[1]).join('L')+'Z';
+world.innerHTML=`<path class="road" d="${GEO.roads.map(r=>pth(r.pts)).join('')}"/>`
+ +GEO.pool.map(p=>`<path class="pool" d="${pth(p)}"/>`).join('')
+ +GEO.trees.map(t=>`<circle class="tree" cx="${t[0]}" cy="${t[1]}" r="${t[2]}"/>`).join('')
+ +GEO.village.map(v=>`<path class="vb" d="${pth(v)}"/>`).join('')
+ +SITES.map(s=>`<path class="buf s-${s.st}" data-buf="${s.id}" d="${pth(GEO.sites[s.id].buffer)}"/>`).join('')
+ +GEO.bs.map(b=>{const s=b.site&&siteById[b.site];
+  return s?`<path class="sb s-${s.st}" data-site="${s.id}" d="${pth(b.pts)}"/>`:`<path class="${b.acq?'vb':'ob'}" data-b="${b.id}" d="${pth(b.pts)}"/>`}).join('');
+
+const map=document.getElementById('map'),ov=document.getElementById('ov'),leads=document.getElementById('leads');
+let view={k:1,x:0,y:0},metric='del',sel=null,hot=null,fitK=1;
+const desk=()=>innerWidth>=900;
+const PL=()=>desk()?380:0,PR=()=>desk()&&sel?480:0;
+const OFF={jenner:[-10,-62],museo:[-24,66],romana:[64,62],hill:[56,-60]};
+const pins={};
+for(const s of SITES){const p=document.createElement('button');p.type='button';p.className='pin s-'+s.st;p.dataset.site=s.id;p.setAttribute('aria-label','Apri '+s.name);ov.appendChild(p);pins[s.id]=p}
+const warns=[],byB={};
+NEAR.forEach(n=>(byB[n.b.id]=byB[n.b.id]||[]).push(n));
+for(const list of Object.values(byB))list.forEach((n,i)=>{const w=document.createElement('span');w.className='warn w-'+n.o.st;w.innerHTML=tri();w.dataset.u=n.u;ov.appendChild(w);warns.push({w,n,dx:(i-(list.length-1)/2)*17,dy:n.b.site?14:0})});
+function val(s){
+ if(metric==='prog')return{v:s.done+'%',sub:'piano '+s.plan+'%',cls:s.done<s.plan?'bad':'good'};
+ if(metric==='bud')return{v:pc(s.dev),sub:eurK(s.E)+' su '+eurK(s.B),cls:s.dev>0?'bad':'good'};
+ if(metric==='rar')return{v:s.rar==null?'—':eur(s.rar),sub:s.rar==null?'nessuna chiave':'a settimana di ritardo',cls:''};
+ return{v:gg(s.delay),sub:'consegna '+fd(s.fc,1),cls:s.delay>0?'bad':'good'};
+}
+function place(){
+ const sc=desk()?1:.75,W=map.clientWidth,H=map.clientHeight,P=[];let L='';
+ for(const s of SITES){
+  const ax=view.x+s.c[0]*view.k,ay=view.y+s.c[1]*view.k,o=OFF[s.id],p=pins[s.id];
+  const vis=ax>PL()-6&&ax<W-PR()+6&&ay>-6&&ay<H+6;p.style.display=vis?'':'none';if(!vis)continue;
+  p.innerHTML=`<i class="dot"></i><b>${esc(s.name)}</b><em class="num">${val(s).v}</em>`;
+  const hw=p.offsetWidth/2,hh=p.offsetHeight/2;
+  P.push({s,p,ax,ay,hw,hh,x:Math.max(PL()+hw+8,Math.min(W-PR()-hw-8,ax+o[0]*sc)),y:Math.max(hh+8,Math.min(H-hh-8,ay+o[1]*sc))});
+ }
+ // on small maps the labels can collide: push overlapping pairs apart vertically
+ for(let it=0;it<8;it++){let moved=false;
+  for(let i=0;i<P.length;i++)for(let j=i+1;j<P.length;j++){const a=P[i],b=P[j];
+   const ox=a.hw+b.hw+6-Math.abs(a.x-b.x),oy=a.hh+b.hh+6-Math.abs(a.y-b.y);if(ox<=0||oy<=0)continue;
+   const d=(a.y<=b.y?1:-1)*oy/2;a.y-=d;b.y+=d;moved=true}
+  for(const q of P)q.y=Math.max(q.hh+8,Math.min(H-q.hh-8,q.y));
+  if(!moved)break}
+ for(const {s,p,ax,ay,x,y} of P){
+  p.style.left=x+'px';p.style.top=y+'px';p.classList.toggle('sel',sel===s.id);
+  L+=`<line class="lead" x1="${ax}" y1="${ay}" x2="${x}" y2="${y}"/><circle class="anchor s-${s.st}" cx="${ax}" cy="${ay}" r="4"/>`;
+ }
+ leads.innerHTML=L;
+ for(const it of warns){const c=it.n.b.c;it.w.style.left=(view.x+c[0]*view.k+it.dx)+'px';it.w.style.top=(view.y+c[1]*view.k+it.dy)+'px'}
+ const want=80/view.k*GEO.mpx,nice=[5,10,20,25,50,100,200].find(v=>v>=want)||200,sc2=document.getElementById('scale');
+ sc2.querySelector('span').textContent=nice+' m';sc2.querySelector('i').style.width=(nice/GEO.mpx*view.k)+'px';
+}
+function apply(){world.setAttribute('transform',`translate(${view.x} ${view.y}) scale(${view.k})`);place()}
+function fit(){
+ const r=map.getBoundingClientRect(),pad=desk()?{l:400,r:sel?500:90,t:60,b:60}:{l:28,r:28,t:56,b:44};
+ const pts=GEO.bs.filter(b=>b.id!=='garage').flatMap(b=>b.pts),xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]);
+ const x0=Math.min(...xs)-24,x1=Math.max(...xs)+24,y0=Math.min(...ys)-24,y1=Math.max(...ys)+24;
+ const W=Math.max(120,r.width-pad.l-pad.r),H=Math.max(120,r.height-pad.t-pad.b),k=Math.min(W/(x1-x0),H/(y1-y0));fitK=k;
+ view={k,x:pad.l+(W-(x1-x0)*k)/2-x0*k,y:pad.t+(H-(y1-y0)*k)/2-y0*k};apply();
+}
+function zoomAt(f,cx,cy){const k=Math.max(fitK*.5,Math.min(fitK*6,view.k*f));f=k/view.k;view.x=cx-(cx-view.x)*f;view.y=cy-(cy-view.y)*f;view.k=k;apply()}
+let drag=null;const ptr=new Map();
+map.addEventListener('pointerdown',e=>{
+ if(e.target.closest('.pin,.warn,.zoom'))return;
+ ptr.set(e.pointerId,{x:e.clientX,y:e.clientY});map.setPointerCapture(e.pointerId);
+ if(ptr.size===1)drag={x:e.clientX,y:e.clientY,vx:view.x,vy:view.y,moved:0,t:e.target};
+ else{const [a,b]=[...ptr.values()];drag={pinch:Math.hypot(a.x-b.x,a.y-b.y),k:view.k}}
+});
+map.addEventListener('pointermove',e=>{
+ if(!ptr.has(e.pointerId)){hover(e);return}
+ ptr.set(e.pointerId,{x:e.clientX,y:e.clientY});
+ if(drag&&drag.pinch&&ptr.size===2){const [a,b]=[...ptr.values()],r=map.getBoundingClientRect();zoomAt(drag.k*Math.hypot(a.x-b.x,a.y-b.y)/drag.pinch/view.k,(a.x+b.x)/2-r.left,(a.y+b.y)/2-r.top);return}
+ if(!drag||drag.pinch)return;
+ const dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.moved=Math.max(drag.moved,Math.abs(dx)+Math.abs(dy));
+ if(drag.moved>3){map.classList.add('drag');hideTip();view.x=drag.vx+dx;view.y=drag.vy+dy;apply()}
+});
+const up=e=>{if(!ptr.has(e.pointerId))return;ptr.delete(e.pointerId);map.classList.remove('drag');
+ if(drag&&!drag.pinch&&drag.moved<=3){const t=drag.t.closest&&drag.t.closest('[data-site]');if(t)open(t.dataset.site)}drag=null};
+map.addEventListener('pointerup',up);map.addEventListener('pointercancel',up);
+map.addEventListener('wheel',e=>{if(e.target.closest('.zoom'))return;e.preventDefault();const r=map.getBoundingClientRect();zoomAt(Math.exp(-e.deltaY*.0016),e.clientX-r.left,e.clientY-r.top)},{passive:false});
+const mid=()=>{const r=map.getBoundingClientRect();return[(PL()+r.width-PR())/2,r.height/2]};
+document.getElementById('zin').onclick=()=>zoomAt(1.4,...mid());
+document.getElementById('zout').onclick=()=>zoomAt(1/1.4,...mid());
+document.getElementById('zfit').onclick=fit;
+
+const tip=document.getElementById('tip');
+function showTip(html,x,y){tip.innerHTML=html;tip.classList.add('on');const w=tip.offsetWidth,hh=tip.offsetHeight;tip.style.left=Math.min(innerWidth-w-8,x+14)+'px';tip.style.top=Math.max(8,y-hh-12)+'px'}
+function hideTip(){tip.classList.remove('on')}
+function setHot(id){
+ if(hot===id)return;hot=id;
+ document.querySelectorAll('.sb').forEach(p=>p.classList.toggle('hot',p.dataset.site===id||p.dataset.site===sel));
+ document.querySelectorAll('.buf').forEach(p=>p.classList.toggle('on',p.dataset.buf===id||p.dataset.buf===sel));
+ document.querySelectorAll('.row[data-site]').forEach(c=>c.classList.toggle('hot',c.dataset.site===id));
+}
+function hover(e){
+ const t=e.target;
+ if(t.classList&&t.classList.contains('sb')){const s=siteById[t.dataset.site];setHot(s.id);showTip(`${esc(s.name)}<small>${STL[s.st]} · apri la scheda</small>`,e.clientX,e.clientY);return}
+ if(t.dataset&&t.dataset.b){const b=bldById[t.dataset.b],u=b.units.map(x=>OPS[x]).filter(Boolean);setHot(null);
+  showTip(`${esc(b.name)}<small>${b.acq?'In acquisizione':u.length?u.map(o=>esc(o.n)+': '+WL[o.st]).join('<br>'):'Borgo Santo'}</small>`,e.clientX,e.clientY);return}
+ setHot(null);hideTip();
+}
+map.addEventListener('pointerleave',()=>{setHot(null);hideTip()});
+ov.addEventListener('pointerover',e=>{
+ const w=e.target.closest('.warn');if(w){const n=NEAR.find(x=>x.u===w.dataset.u),f=n.near[0];
+  showTip(`${esc(n.o.n)}<small>${esc(wtxt(n.o))}<br>${f.m===0?'nello stesso edificio di':'a '+f.m+' m da'} ${esc(siteById[f.site].name)}</small>`,e.clientX,e.clientY);return}
+ const p=e.target.closest('.pin');if(p)setHot(p.dataset.site);
+});
+ov.addEventListener('pointerout',e=>{if(e.target.closest('.warn,.pin')){hideTip();setHot(null)}});
+ov.addEventListener('click',e=>{const p=e.target.closest('.pin');if(p)open(p.dataset.site)});
+
+const late=SITES.filter(s=>s.delay>0).length,totR=SITES.reduce((a,s)=>a+(s.rar||0),0);
+const order={red:0,orange:1,green:2},sorted=[...SITES].sort((a,b)=>order[a.st]-order[b.st]||b.delay-a.delay);
+const MET=[['del','Consegna'],['prog','Progresso'],['bud','Budget'],['rar','Ricavi']];
+const panel=document.getElementById('panel');
+function renderPanel(){
+ panel.innerHTML=`<h1>Cantieri</h1>
+<p class="finding"><b>${late} su ${SITES.length} in ritardo.</b> Ogni settimana in più costa <b class="num">${eur(totR)}</b> di ricavi.</p>
+<div class="seg" role="group" aria-label="Dato mostrato">${MET.map(([k,l])=>`<button type="button" data-m="${k}" aria-pressed="${metric===k}">${l}</button>`).join('')}</div>
+<div class="group">${sorted.map(s=>{const v=val(s);return `<button type="button" class="row s-${s.st}${sel===s.id?' sel':''}" data-site="${s.id}"><i class="dot"></i><span class="tx"><b>${esc(s.name)}</b><small class="num">${esc(v.sub)}</small></span><span class="val num ${v.cls}">${v.v}</span><span class="chev" aria-hidden="true">›</span></button>`}).join('')}</div>
+<div class="group"><label class="switch" for="tw"><span class="w-occ">${tri()}</span><span class="tx">Camere vicine<small>${NEAR.length} camere entro ${GEO.r} m da un cantiere</small></span><input type="checkbox" id="tw" ${ov.classList.contains('hide-warn')?'':'checked'}></label></div>
+<p class="fine">Dati dimostrativi · © OpenStreetMap contributors</p>`;
+}
+renderPanel();
+panel.addEventListener('click',e=>{const m=e.target.closest('[data-m]');if(m){metric=m.dataset.m;renderPanel();place();return}const c=e.target.closest('.row[data-site]');if(c)open(c.dataset.site)});
+panel.addEventListener('change',e=>{if(e.target.id==='tw')ov.classList.toggle('hide-warn',!e.target.checked)});
+panel.addEventListener('pointerover',e=>{const c=e.target.closest('.row[data-site]');setHot(c?c.dataset.site:null)});
+panel.addEventListener('pointerleave',()=>setHot(null));
+
+const sheet=document.getElementById('sheet');let tab='tappe';
+function tappe(s){
+ const end=[...s.phases.map(p=>p[1]),...s.phases.map(p=>p[2])].sort().at(-1),t0=T(s.start),t1=T(end)+10*864e5;
+ const X=d=>((T(d)-t0)/(t1-t0)*100).toFixed(2)+'%',W=(a,b)=>Math.max(.6,(T(b)-T(a))/(t1-t0)*100).toFixed(2)+'%';
+ let pp=s.start,pa=s.start,rows='';
+ for(const [n,p,a,st] of s.phases){
+  const dl=days(p,a);
+  let bars=`<span class="tl-p" style="left:${X(pp)};width:${W(pp,p)}"></span>`;
+  if(st==='done')bars+=`<span class="tl-a a-done" style="left:${X(pa)};width:${W(pa,a)}"></span>`;
+  else if(st==='doing')bars+=`<span class="tl-a a-now" style="left:${X(pa)};width:${W(pa,TODAY)}"></span><span class="tl-a a-fut" style="left:${X(TODAY)};width:${W(TODAY,a)}"></span>`;
+  else bars+=`<span class="tl-a a-fut" style="left:${X(pa)};width:${W(pa,a)}"></span>`;
+  rows+=`<div class="tl-row"><div class="tl-h"><b>${n}</b><small class="num">${fd(a)}${dl?` · <span class="${dl>0?'bad':'good'}">${gg(dl)}</span>`:''}</small></div><div class="tl-tr">${bars}<i class="tday" style="left:${X(TODAY)}"></i></div></div>`;
+  pp=p;pa=a;
+ }
+ const tp=parseFloat(X(TODAY)),hide=v=>v?' style="visibility:hidden"':'';   // keep "Oggi" from colliding with the end labels
+ return `<div class="tl">${rows}</div>
+ <div class="axis num"><span${hide(tp<30)}>${fd(s.start,1)}</span><span class="oggi" style="left:${X(TODAY)}">Oggi</span><span${hide(tp>70)}>${fd(end,1)}</span></div>
+ <div class="key"><span><i style="background:var(--line)"></i>Previsto</span><span><i class="a-done"></i>Fatto</span><span><i class="a-now"></i>In corso</span><span><i class="a-fut"></i>Stima</span></div>`;
+}
+function budget(s){
+ const sc=Math.max(...s.budget.map(r=>Math.max(r[1],r[4],r[2]+r[3]))),P=v=>(v/sc*100).toFixed(2)+'%';
+ return `<div class="btop"><b class="num">${eurK(s.E)}</b><span>previsti a fine lavori su ${eurK(s.B)} approvati</span></div>`+s.budget.map(([n,b,sp,im,e])=>{
+  const li=b-sp-im,ex=Math.max(0,e-Math.max(b,sp+im));
+  return `<div class="brow" title="Speso ${eurK(sp)} · impegnato ${eurK(im)} · budget ${eurK(b)} · previsione ${eurK(e)}"><div class="tl-h"><b>${n}</b><small class="num ${li<0?'bad':''}">${li<0?'sforato di '+eurK(-li):'libero '+eurK(li)}</small></div>
+  <div class="bt"><span class="b-sp" style="left:0;width:${P(sp)}"></span><span class="b-im" style="left:${P(sp)};width:${P(im)}"></span>${ex>0?`<span class="b-ex" style="left:${P(Math.max(b,sp+im))};width:${P(ex)}"></span>`:''}<i style="left:${P(b)}"></i></div></div>`}).join('')
+ +`<div class="key"><span><i class="b-sp"></i>Speso</span><span><i class="b-im"></i>Impegnato</span><span><i style="background:var(--fill)"></i>Libero</span><span><i class="b-ex"></i>Extra previsto</span></div>`;
+}
+const PSL={ok:'Approvato',wait:'In attesa',todo:'Da presentare'};
+const permessi=s=>`<ul class="lst">${s.permits.map(p=>`<li class="k-${p.block?'block':p.st}"><span class="tx">${esc(p.n)}<small>${esc(p.e)}${p.st==='wait'?' · '+esc(p.d):''}</small></span><span class="tg">${p.block?'Blocca i lavori':PSL[p.st]}</span></li>`).join('')}</ul>`;
+const rischi=s=>`<ul class="lst">${s.risks.map(r=>`<li class="p${r.p[0]}"><span class="tx">${esc(r.r)}<small>${esc(r.i)} · ${esc(r.o)}</small></span><span class="tg">${r.p}</span></li>`).join('')}</ul>`;
+function renderSheet(){
+ const s=siteById[sel];if(!s)return;
+ const near=NEAR.map(n=>({n,f:n.near.find(x=>x.site===s.id)})).filter(x=>x.f).sort((a,b)=>a.f.m-b.f.m);
+ const occ=near.filter(x=>x.n.o.st!=='free').length;
+ sheet.innerHTML=`<div class="sh s-${s.st}">
+ <button class="x" type="button" aria-label="Chiudi">✕</button>
+ <div class="st"><i></i>${STL[s.st]}</div>
+ <h2>${esc(s.name)}</h2>
+ <p class="sub">${s.keys?s.units.map(u=>`${u.m2} m² ${esc(u.cat.split(',')[0])}`).join(' + '):'Spazio comune'} · dal ${fd(s.start,1)}</p>
+ <p class="why">${s.why}</p>
+ <div class="hero num">
+  <div><b>${s.done}%</b><span>completato, piano ${s.plan}%</span><div class="mini"><span style="width:${s.done}%"></span><i style="left:${s.plan}%"></i></div></div>
+  <div><b class="${s.dev>0?'bad':'good'}">${pc(s.dev)}</b><span>budget, ${eurK(s.E)} su ${eurK(s.B)}</span></div>
+  <div><b>${fd(s.fc,1)}</b><span>consegna, <span style="display:inline" class="${s.delay>0?'bad':'good'}">${gg(s.delay)}</span> sul piano</span></div>
+  <div><b>${s.rar==null?'—':eur(s.rar)}</b><span title="${s.keys?esc(`(${s.units.map(u=>eur(u.adr)).join(' + ')}) × ${Math.round(s.occ*100)}% × 7 notti`):''}">${s.rar==null?'nessuna chiave da vendere':'a rischio ogni settimana di ritardo'}</span></div>
+ </div>
+ ${near.length?`<details class="near"><summary><span class="w-${occ?'occ':'free'}">${tri()}</span>Camere vicine<em class="num">${near.length}</em></summary><ul>${near.map(({n,f})=>`<li class="w-${n.o.st}">${tri()}<span>${esc(n.o.n)} <small>${esc(wtxt(n.o))}</small></span><em class="num">${f.m===0?'stesso edificio':f.m+' m'}</em></li>`).join('')}</ul></details>`:'<hr class="hair">'}
+ <div class="seg" role="group" aria-label="Sezioni">${[['tappe','Tappe'],['budget','Budget'],['permessi','Permessi'],['rischi','Rischi']].map(([k,l])=>`<button type="button" data-tab="${k}" aria-pressed="${tab===k}">${l}</button>`).join('')}</div>
+ <div>${{tappe,budget,permessi,rischi}[tab](s)}</div>
+ </div>`;
+}
+sheet.addEventListener('click',e=>{if(e.target.closest('.x')){close();return}const b=e.target.closest('[data-tab]');if(b){const o=sheet.querySelector('details.near'),wasOpen=o&&o.open;tab=b.dataset.tab;renderSheet();if(wasOpen)sheet.querySelector('details.near').open=true}});
+function open(id){
+ sel=id;renderSheet();sheet.classList.add('open');sheet.scrollTop=0;hot=undefined;setHot(id);renderPanel();
+ if(desk()){const s=siteById[id],r=map.getBoundingClientRect(),sx=view.x+s.c[0]*view.k,lo=PL()+40,hi=r.width-PR()-40;if(sx<lo||sx>hi)view.x+=(lo+hi)/2-sx}
+ apply();sheet.querySelector('.x').focus({preventScroll:true});
+}
+function close(){const id=sel;sel=null;sheet.classList.remove('open');hot=undefined;setHot(null);renderPanel();place();const p=pins[id];if(p&&p.style.display!=='none')p.focus({preventScroll:true})}
+addEventListener('keydown',e=>{if(e.key==='Escape'&&sel)close()});
+let lw=innerWidth,ready=false;
+new ResizeObserver(()=>{if(!ready||Math.abs(innerWidth-lw)>40){lw=innerWidth;ready=true;fit()}else place()}).observe(map);
+fit();
+}
+</script>
+</body>
+</html>
